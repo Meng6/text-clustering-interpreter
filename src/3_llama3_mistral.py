@@ -24,10 +24,9 @@ def get_llms_response(dataset, num_clusters):
     res_l = ollama.chat(model='llama3', messages=msg_l, keep_alive=0)['message']['content']
 
     msg_m = [{'role': 'user', 'content': """{prompt}
-Someone interpreted these clusters as follows:
-{res_l}.
-Based on the clustering results and the above interpretations, please summarize the interpretations and provide your response in the format of "interpretation 1\ninterpretation 2\n..." directly. No extra sentences are included. The following responses should start from cluster 1 and end with cluster 24. Here are the interpreted clusters separated by a new line (do not repeat or paraphrase this sentence, one line per cluster):""".format(prompt=prompt, res_l=res_l)}]
-    # Based on the clustering results and the above interpretations, please use one or two words to interpret each cluster without explanation and provide your response in the formate of [cluster number: interpretation of the cluster].format(prompt=prompt, res_l=res_l)}]
+    Someone interpreted these clusters as follows:
+    {res_l}.
+    Based on the clustering results and the above interpretations, please summarize the interpretations and provide your response in the format of "interpretation 1\ninterpretation 2\n..." directly. No extra sentences are included. The following responses should start from cluster 1 and end with cluster 24. Here are the interpreted clusters separated by a new line (do not repeat or paraphrase this sentence, one line per cluster):""".format(prompt=prompt, res_l=res_l)}]
     res_m = ollama.chat(model='mistral', messages=msg_m, keep_alive=0)['message']['content']
     print(res_m)
     return (res_m, true)
